@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    domains: [
+      'store.kyobobook.co.kr',
+    ],
+    remotePatterns: [
+      {
+        hostname: '**',
+      },
+    ],
+  },
   sassOptions: {
     includePaths: ['styles'],
     additionalData: `@import "@/styles/color.scss";`,
