@@ -92,14 +92,8 @@ export async function POST() {
     for (const result of BookList) {
       try {
         const backendResponse = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/books`,
-          result,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'X-API-Version': 1,
-            },
-          }
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/books`,
+          result
         );
         backendResponses.push(backendResponse.data);
         console.log(backendResponse.data);
