@@ -26,16 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <head>
-        <style jsx global>{`
-          html {
-            font-family:
-              ${batang.style.fontFamily}, ${notoSansKr.style.fontFamily};
-          }
-        `}</style>
-      </head>
-      <body className="rootContainer">
+    <html lang="ko" suppressHydrationWarning>
+      <head></head>
+      <body
+        className={`rootContainer ${batang.className} ${notoSansKr.className}`}>
         <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
