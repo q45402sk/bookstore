@@ -7,18 +7,32 @@ import { useEffect, useState } from 'react';
 import Header from './_components/Header';
 import styles from './Home.module.scss';
 import Link from 'next/link';
+import Bar from './_components/Bar';
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [previousTotalPages, setPreviousTotalPages] = useState(0);
-
-  const { data, isLoading, isError } = useBookList(currentPage, 10, '', '');
+  const [authorInput, setAuthorInput] = useState('');
+  const [titleInput, setTitleInput] = useState('');
+  const [author, setAuthor] = useState('');
+  const [title, setTitle] = useState('');
+  const { data, isLoading, isError } = useBookList(
+    currentPage,
+    10,
+    title,
+    author
+  );
 
   console.log('데이터:', data, '로딩 중:', isLoading, '에러 발생:', isError);
   //데이타가 없을때 에러처리 필요
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+  };
+
+  const handleSearch = (titleInput: string, authorInput: string) => {
+    setAuthor(authorInput);
+    setTitle(titleInput);
   };
 
   // 총 페이지 값 저장 (페이지를 넘길 때 페이지 숫자가 보이지 않는 것을 방지)
@@ -31,6 +45,13 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Header />
+      <Bar
+        author={authorInput}
+        setAuthor={setAuthorInput}
+        title={titleInput}
+        setTitle={setTitleInput}
+        handleSearch={handleSearch}
+      />
       <div className={styles.body}>
         {isLoading && <div>로딩중...</div>}
         {isError && <div>에러가 발생했습니다.</div>}
