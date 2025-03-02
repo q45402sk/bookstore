@@ -16,6 +16,7 @@ export default function Home() {
   const [titleInput, setTitleInput] = useState('');
   const [author, setAuthor] = useState('');
   const [title, setTitle] = useState('');
+  const [isDeleteMode, setIsDeleteMode] = useState(false);
   const { data, isLoading, isError } = useBookList(
     currentPage,
     10,
@@ -51,6 +52,8 @@ export default function Home() {
         title={titleInput}
         setTitle={setTitleInput}
         handleSearch={handleSearch}
+        isDeleteMode={isDeleteMode}
+        setIsDeleteMode={setIsDeleteMode}
       />
       <div className={styles.body}>
         {isLoading && <div>로딩중...</div>}
@@ -58,29 +61,34 @@ export default function Home() {
         {data?.books?.map((book: IBookInfo) => {
           return (
             <div key={book.id} className={styles.bookContainer}>
-              <Link className={styles.book} href={'/id'}>
-                <Image
-                  src={book.thumbnail}
-                  alt="썸네일 이미지"
-                  width={100}
-                  height={150}
-                />
-                <div className={styles.bookDetails}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                    }}>
-                    <div className={styles.keyDetails}>
-                      <div className={styles.title}>{book.title}</div>
-                      <div className={styles.author}>{book.author}</div>
-                      <div className={styles.price}>{book.price}원</div>
+              <div className={styles.deleteButtonWithBook}>
+                {isDeleteMode && (
+                  <button className={styles.deleteButton} type="button" />
+                )}
+                <Link className={styles.book} href={'/id'}>
+                  <Image
+                    src={book.thumbnail}
+                    alt="썸네일 이미지"
+                    width={100}
+                    height={150}
+                  />
+                  <div className={styles.bookDetails}>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                      }}>
+                      <div className={styles.keyDetails}>
+                        <div className={styles.title}>{book.title}</div>
+                        <div className={styles.author}>{book.author}</div>
+                        <div className={styles.price}>{book.price}원</div>
+                      </div>
+                      <div className={styles.count}>{book.count}권</div>
                     </div>
-                    <div className={styles.count}>{book.count}권</div>
+                    <div className={styles.summary}>{book.summary}</div>
                   </div>
-                  <div className={styles.summary}>{book.summary}</div>
-                </div>
-              </Link>
+                </Link>
+              </div>
               <div className={styles.divider} />
             </div>
           );

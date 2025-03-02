@@ -9,6 +9,8 @@ interface IBarProps {
   author: string;
   setAuthor: Dispatch<SetStateAction<string>>;
   handleSearch: (title: string, author: string) => void;
+  isDeleteMode: boolean;
+  setIsDeleteMode: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function Bar({
@@ -17,6 +19,8 @@ export default function Bar({
   author,
   setAuthor,
   handleSearch,
+  isDeleteMode,
+  setIsDeleteMode,
 }: IBarProps) {
   const [isVisible, setIsVisible] = useState(true); // 바가 보이는지 여부
   const [lastScrollY, setLastScrollY] = useState(0); // 이전 스크롤 위치 저장
@@ -48,7 +52,7 @@ export default function Bar({
         setAuthor={setAuthor}
         handleSearch={handleSearch}
       />
-      <EditBar />
+      <EditBar isDeleteMode={isDeleteMode} setIsDeleteMode={setIsDeleteMode} />
     </div>
   );
 }
