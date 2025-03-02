@@ -25,6 +25,11 @@
 ---
 
 ## 설치 방법
+### env
+NEXT_PUBLIC_DEPLOY_URL=https://songeun-bookstore.vercel.app/
+
+NEXT_PUBLIC_API_BASE_URL=https://bookstore-backend-rv6m.onrender.com
+
 ### window 기준 (node.js 설치)
 git clone https://github.com/q45402sk/bookstore.git
 
@@ -32,7 +37,7 @@ cd bookstore
 
 npm install
 
-.env 파일 만들어서 환경 변수 설정(환경 변수: 메일 첨부)
+.env 파일 만들어서 환경 변수 설정
 
 npm run dev
 
