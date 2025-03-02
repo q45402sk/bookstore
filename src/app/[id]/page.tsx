@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { useBookDetails } from '@/api/queryHooks/useBookList';
@@ -6,11 +7,7 @@ import Image from 'next/image';
 import Header from '../_components/Header';
 import Link from 'next/link';
 
-export default function BookDetails({
-  params,
-}: {
-  params: { [key: string]: string };
-}) {
+export default function BookDetails({ params }: { params: any }) {
   const { id } = params;
   const { data, isLoading } = useBookDetails(Number(id));
 

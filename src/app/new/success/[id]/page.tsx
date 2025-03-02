@@ -1,13 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import styles from './Success.module.scss';
 import { useRouter } from 'next/navigation';
 
-export default function NewSuccess({
-  params,
-}: {
-  params: { [key: string]: string };
-}) {
+export default function NewSuccess({ params }: { params: any }) {
   const { id } = params;
   const router = useRouter();
   const handleGoToBookDetails = () => {
