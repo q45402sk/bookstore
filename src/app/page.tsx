@@ -38,8 +38,8 @@ export default function Home() {
     handleModalClose: handleDeleteModalClose,
   } = useModal();
 
-  console.log('데이터:', data, '로딩 중:', isLoading, '에러 발생:', isError);
-  //데이타가 없을때 에러처리 필요
+  // console.log('데이터:', data, '로딩 중:', isLoading, '에러 발생:', isError);
+  // //데이타가 없을때 에러처리 필요
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
