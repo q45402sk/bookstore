@@ -65,7 +65,7 @@ export default function Home() {
                 {isDeleteMode && (
                   <button className={styles.deleteButton} type="button" />
                 )}
-                <Link className={styles.book} href={'/id'}>
+                <Link className={styles.book} href={`/${book.id}`}>
                   <Image
                     src={book.thumbnail}
                     alt="썸네일 이미지"
@@ -99,10 +99,7 @@ export default function Home() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         handlePageChange={handlePageChange}
-        books={[
-          { id: 1, title: 'apple' },
-          { id: 1, title: 'banana' },
-        ]}
+        books={data?.books || []}
       />
     </div>
   );

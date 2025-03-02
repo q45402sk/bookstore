@@ -12,6 +12,8 @@ import {
 } from '@/api/queryHooks/useBookList';
 import { QueryKey } from '@/utils/QueryKey';
 import { useQueryClient } from '@tanstack/react-query';
+import Modal from '../Modal';
+import useModal from '@/hooks/useModal';
 
 interface IBookFormProps {
   mode: 'create' | 'edit';
@@ -26,6 +28,13 @@ export default function BookForm({ mode, initialData }: IBookFormProps) {
   const deleteBook = useDeleteBook(initialData?.id || 0);
   const queryClient = useQueryClient();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  const {
+    modalOpen: deleteModalOpen,
+    handleModalOpen: handleDeleteModalOpen,
+    handleModalClose: handleDeleteModalClose,
+  } = useModal();
+
   const methods = useForm<IBookInfo>({
     mode: 'all',
     defaultValues: {
@@ -276,13 +285,41 @@ export default function BookForm({ mode, initialData }: IBookFormProps) {
                 type="button"
                 disabled={deleteBook.isPending}
                 className={styles.deleteButton}
-                onClick={handleDeleteBook}>
+                onClick={handleDeleteModalOpen}>
                 책 삭제
               </button>
             )}
           </div>
         </form>
       </FormProvider>
+      <Modal
+        modalOpen={deleteModalOpen}
+        onClose={() => {
+          handleDeleteModalClose();
+        }}
+        maxWidth={552}>
+        <div className={styles.modalBackground}>
+          <div className={styles.description}>
+            <p> 책을 삭제하시겠습니까?</p>
+          </div>
+        </div>
+        <div className={styles.modalButtons}>
+          <button
+            type="button"
+            onClick={handleDeleteBook}
+            disabled={deleteBook.isPending}
+            className={styles.modalFirstButton}>
+            네
+          </button>
+          <button
+            type="button"
+            onClick={handleDeleteModalClose}
+            disabled={deleteBook.isPending}
+            className={styles.modalSecondButton}>
+            아니오
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }

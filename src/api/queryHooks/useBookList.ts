@@ -18,6 +18,15 @@ export const useBookList = (
   });
 };
 
+export const useBookDetails = (id: number) => {
+  const query = useQuery({
+    queryKey: QueryKey.BOOKS.DETAIL(id),
+    queryFn: () => bookAPI.getBookDetails(id),
+  });
+
+  return { ...query, refetch: query.refetch };
+};
+
 export const useDeleteBook = (id: number) => {
   const queryClient = useQueryClient();
   return useMutation({

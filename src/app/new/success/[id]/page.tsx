@@ -3,7 +3,11 @@
 import styles from './Success.module.scss';
 import { useRouter } from 'next/navigation';
 
-export default function NewSuccess({ params }: { params: any }) {
+export default function NewSuccess({
+  params,
+}: {
+  params: { [key: string]: string };
+}) {
   const { id } = params;
   const router = useRouter();
   const handleGoToBookDetails = () => {

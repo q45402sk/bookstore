@@ -19,6 +19,10 @@ export const bookAPI = {
     });
     return response.data;
   },
+  getBookDetails: async (id: number) => {
+    const response = await axiosInstance.get<IBookInfo>(`/api/books/${id}`);
+    return response.data;
+  },
   deleteBook: async (id: number) => {
     return axiosInstance.delete(`/api/books/${id}`);
   },
