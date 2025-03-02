@@ -97,7 +97,7 @@ export default function BookForm({ mode, initialData }: IBookFormProps) {
       },
       onError: () => {
         alert('책 삭제에 실패했습니다.');
-        // handleDeleteModalClose();
+        handleDeleteModalClose();
       },
     });
   };
