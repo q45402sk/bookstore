@@ -11,16 +11,27 @@ import {
   useUpdateBook,
 } from '@/api/queryHooks/useBookList';
 import { QueryKey } from '@/utils/QueryKey';
-import { useQueryClient } from '@tanstack/react-query';
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  useQueryClient,
+} from '@tanstack/react-query';
 import Modal from '../Modal';
 import useModal from '@/hooks/useModal';
 
 interface IBookFormProps {
   mode: 'create' | 'edit';
   initialData?: IBookInfo; //edit 모드일 때만 필요
+  refetch?: (
+    options?: RefetchOptions
+  ) => Promise<QueryObserverResult<IBookInfo, Error>>;
 }
 
-export default function BookForm({ mode, initialData }: IBookFormProps) {
+export default function BookForm({
+  mode,
+  initialData,
+  refetch,
+}: IBookFormProps) {
   const editMode = mode === 'edit';
   const router = useRouter();
   const createBook = useCreateBook();
@@ -28,6 +39,7 @@ export default function BookForm({ mode, initialData }: IBookFormProps) {
   const deleteBook = useDeleteBook(initialData?.id || 0);
   const queryClient = useQueryClient();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 
   const {
     modalOpen: deleteModalOpen,
@@ -56,32 +68,40 @@ export default function BookForm({ mode, initialData }: IBookFormProps) {
   } = methods;
 
   const onSubmit = async (bookInfo: IBookInfo) => {
+    setIsSubmitLoading(true);
     setIsButtonDisabled(true);
 
     if (mode === 'create') {
       createBook.mutate(bookInfo, {
         onSuccess: async () => {
+          setIsSubmitLoading(false);
           router.replace(`/new/success/${bookInfo.id}`);
           queryClient.invalidateQueries({
-            queryKey: QueryKey.BOOKS.LIST,
+            queryKey: [QueryKey.BOOKS.KEY, QueryKey.LIST],
             refetchType: 'all',
           });
         },
         onError: () => {
           alert(`책 등록에 실패했어요.`);
           setIsButtonDisabled(false);
+          setIsSubmitLoading(false);
         },
       });
     } else {
       updateBook.mutate(bookInfo, {
         onSuccess: async () => {
+          setIsSubmitLoading(false);
           router.replace(`/${initialData?.id}`);
           queryClient.invalidateQueries({
-            queryKey: QueryKey.BOOKS.LIST,
+            queryKey: [QueryKey.BOOKS.KEY, QueryKey.LIST],
             refetchType: 'all',
           });
+          if (refetch) {
+            refetch();
+          }
         },
         onError: () => {
+          setIsSubmitLoading(false);
           alert(`책 수정에 실패했어요.`);
           router.back();
           setIsButtonDisabled(false);
@@ -137,7 +157,7 @@ export default function BookForm({ mode, initialData }: IBookFormProps) {
               </div>
             </div>
             <div className={styles.inputContainer}>
-              <label htmlFor="title" className={styles.author}>
+              <label htmlFor="title" className={styles.title}>
                 작가
               </label>
               <p className={styles.titleDescription}>작가는 누구인가요?</p>
@@ -159,7 +179,7 @@ export default function BookForm({ mode, initialData }: IBookFormProps) {
               </div>
             </div>
             <div className={styles.inputContainer}>
-              <label htmlFor="price" className={styles.author}>
+              <label htmlFor="price" className={styles.title}>
                 가격
               </label>
               <p className={styles.titleDescription}>가격을 정해주세요.</p>
@@ -195,6 +215,7 @@ export default function BookForm({ mode, initialData }: IBookFormProps) {
                   {...register('summary', {
                     required: '책 요약을 입력해 주세요.',
                   })}
+                  className={styles.textarea}
                 />
                 <div className={styles.errorMessage}>
                   {errors.summary && errors.summary.message}
@@ -247,9 +268,10 @@ export default function BookForm({ mode, initialData }: IBookFormProps) {
                 </div>
               </div>
             </div>
-
             <div className={styles.inputContainer}>
-              <label htmlFor="count" className={styles.author}>
+              <label
+                htmlFor="count"
+                className={`${styles.title} ${styles.count}`}>
                 판매 수량
               </label>
               <p className={styles.titleDescription}>
@@ -292,6 +314,11 @@ export default function BookForm({ mode, initialData }: IBookFormProps) {
           </div>
         </form>
       </FormProvider>
+      {isSubmitLoading && (
+        <div className={styles.submitLoadingBackground}>
+          <div className={styles.submitLoading}>등록중 입니다...</div>
+        </div>
+      )}
       <Modal
         modalOpen={deleteModalOpen}
         onClose={() => {

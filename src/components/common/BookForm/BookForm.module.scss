@@ -1,5 +1,162 @@
 .container {
   padding: 100px 12px;
+  background-color: #fff4e5;
+}
+
+.title {
+  display: block;
+  color: $green-darker;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 83.333% */
+  margin: 0 0 20px;
+  @media screen and (max-width: 480px) {
+    font-size: 16px;
+    margin: 0 0 4px;
+  }
+}
+
+.titleDescription {
+  color: $gray-dark;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 112.5% */
+  letter-spacing: 0.64px;
+  margin: 0 0 20px;
+  @media screen and (max-width: 480px) {
+    font-size: 12px;
+    margin: 0 0 8px;
+  }
+}
+
+.commonInput {
+  width: 100%;
+  height: 66px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: $gray-light;
+  padding: 0 16px;
+  font-size: 16px;
+
+  &:focus {
+    outline: none;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 12px;
+    height: 48px;
+  }
+}
+
+.textEditor {
+  margin: 0 0 28px;
+  .textarea {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    background: $gray-light;
+    padding: 16px;
+    font-size: 16px;
+  }
+}
+
+@mixin submitButton {
+  border: 1px solid #000000;
+  &:disabled {
+    background-color: #888888;
+  }
+}
+
+.submitButton {
+  width: 100%;
+  height: 66px;
+  border-radius: 12px;
+  background: $green-dark;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 24px 0 0;
+
+  &:hover {
+    background: $green-light;
+  }
+
+  &:active {
+    background: $green-light;
+  }
+
+  &:disabled {
+    background: #9ca3af;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 48px;
+  }
+}
+.deleteButton {
+  width: 100%;
+  height: 66px;
+  border-radius: 12px;
+  border: 2px solid $green-dark;
+  background: #fff;
+  color: $green-dark;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 24px 0 0;
+
+  &:disabled {
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 48px;
+  }
+}
+
+.error {
+  border-radius: 10px;
+  border: 1px solid #dd111e;
+  background: #fff;
+}
+
+.errorMessage {
+  color: var(--error, #dd111e);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 112.5% */
+  letter-spacing: 0.64px;
+  margin: 8px 0 0;
+  @media screen and (max-width: 480px) {
+    font-size: 12px;
+  }
+}
+
+.successMessage {
+  color: $green-darker;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 112.5% */
+  letter-spacing: 0.64px;
+  margin: 8px 0 0;
+
+  &.info {
+    color: $gray-darker;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 12px;
+  }
+}
+
+.count {
+  margin: 20px 0 16px;
 }
 
 .modalBackground {
@@ -75,4 +232,30 @@
     background: $green-normal;
     width: 50%;
   }
+}
+
+.submitLoadingBackground {
+  width: min(600px, 100%);
+  background-color: rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submitLoading {
+  background-color: #ddf6d4;
+  z-index: 9000;
+  width: 300px;
+  height: 150px;
+  overflow: auto;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

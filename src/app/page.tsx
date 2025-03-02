@@ -10,8 +10,11 @@ import Link from 'next/link';
 import Bar from './_components/Bar';
 import useModal from '@/hooks/useModal';
 import Modal from '@/components/common/Modal';
+import { useQueryClient } from '@tanstack/react-query';
+import { QueryKey } from '@/utils/QueryKey';
 
 export default function Home() {
+  const queryClient = useQueryClient();
   const [currentPage, setCurrentPage] = useState(1);
   const [previousTotalPages, setPreviousTotalPages] = useState(0);
   const [authorInput, setAuthorInput] = useState('');
@@ -53,6 +56,11 @@ export default function Home() {
     deleteBook.mutate(selectedBookId, {
       onSuccess: () => {
         setSelectedBookId(null); // 삭제 후 선택 ID 초기화
+        handleDeleteModalClose();
+        queryClient.invalidateQueries({
+          queryKey: [QueryKey.BOOKS.KEY, QueryKey.LIST],
+          refetchType: 'all',
+        });
       },
       onError: () => {
         alert('책 삭제에 실패했습니다.');
