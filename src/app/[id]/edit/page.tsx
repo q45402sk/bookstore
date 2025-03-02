@@ -3,6 +3,7 @@
 import BookForm from '@/components/common/BookForm';
 import styles from './Edit.module.scss';
 import { useBookDetails } from '@/api/queryHooks/useBookList';
+import Header from '@/app/_components/Header';
 
 export default function EditBook({
   params,
@@ -13,12 +14,15 @@ export default function EditBook({
   const { data, isLoading } = useBookDetails(Number(id));
 
   return (
-    <div className={styles.body}>
-      {isLoading ? (
-        <div className={styles.spinnerContainer}>로딩중...</div>
-      ) : (
-        <BookForm mode={'edit'} initialData={data} />
-      )}
-    </div>
+    <>
+      <Header backButton={true} />
+      <div className={styles.body}>
+        {isLoading ? (
+          <div className={styles.spinnerContainer}>로딩중...</div>
+        ) : (
+          <BookForm mode={'edit'} initialData={data} />
+        )}
+      </div>
+    </>
   );
 }

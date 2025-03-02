@@ -81,8 +81,11 @@ export default function Home() {
         setIsDeleteMode={setIsDeleteMode}
       />
       <div className={styles.body}>
-        {isLoading && <div>로딩중...</div>}
-        {isError && <div>에러가 발생했습니다.</div>}
+        {isLoading && <div style={{ height: '100vh' }}>로딩중...</div>}
+        {isError && <div style={{ height: '100vh' }}>에러가 발생했습니다.</div>}
+        {data?.books.length === 0 && !isLoading && !isError && (
+          <div className={styles.noResult} />
+        )}
         {data?.books?.map((book: IBookInfo) => {
           return (
             <div key={book.id} className={styles.bookContainer}>
