@@ -27,7 +27,9 @@
 ## 설치 방법
 ### window 기준 (node.js 설치)
 git clone https://github.com/q45402sk/bookstore.git
+
 cd bookstore
+
 npm install
 
 .env 파일 만들어서 환경 변수 설정(환경 변수: 메일 첨부)
@@ -36,18 +38,23 @@ npm run dev
 
 ###  Ubuntu 18.04 기준
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+
 sudo apt-get install -y nodejs
 
 git clone https://github.com/q45402sk/bookstore.git
+
 cd bookstore
+
 npm install
 
 cp .env.example .env
+
 nano .env
 
 .env 파일을 열어서 필요한 값을 수정한 후 저장
 
 npm run build
+
 npm start
 
 ## 개발 기간
