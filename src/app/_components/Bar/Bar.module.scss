@@ -1,0 +1,24 @@
+.container {
+  height: 60px;
+  position: fixed;
+  top: 79px;
+  background-color: #f0d7b4;
+  z-index: 7000;
+  transition: transform 0.3s ease-in-out;
+  width: min(600px, 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+  }
+}
+
+.container.hidden {
+  transform: translateY(-100%); /* 위로 숨김 */
+}
+
+.container.visible {
+  transform: translateY(0); /* 다시 나타남 */
+}

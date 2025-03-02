@@ -5,10 +5,10 @@
   top: 0;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
   padding: 5px 12px;
   background-color: #f8d4a1;
-  z-index: 9999;
+  z-index: 8000;
 }
 
 .logo {
@@ -16,4 +16,11 @@
   margin-right: 10px;
   font-weight: 700;
   color: #402601;
+}
+
+.backButton {
+  font-size: 16spx;
+  margin-right: 10px;
+  color: #402601;
+  z-index: 8001;
 }
