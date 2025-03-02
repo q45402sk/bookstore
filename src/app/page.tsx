@@ -48,6 +48,7 @@ export default function Home() {
   const handleSearch = (titleInput: string, authorInput: string) => {
     setAuthor(authorInput);
     setTitle(titleInput);
+    setCurrentPage(1);
   };
 
   const handleDeleteBook = () => {
