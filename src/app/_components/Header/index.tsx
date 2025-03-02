@@ -1,7 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import styles from './Header.module.scss';
-import Link from 'next/link';
 
 export default function Header({ backButton }: { backButton?: boolean }) {
   const router = useRouter();
@@ -20,9 +19,10 @@ export default function Header({ backButton }: { backButton?: boolean }) {
       ) : (
         <div></div>
       )}
-      <Link href="/" className={styles.logo}>
+      {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+      <a href="/" className={styles.logo}>
         송은문고
-      </Link>
+      </a>
     </header>
   );
 }
