@@ -19,7 +19,6 @@
   <img src='https://img.shields.io/badge/Sass-v1.77.8-yellow?logo=Sass'/>
   <img src='https://img.shields.io/badge/Puppeteer-v23.0.2-blue?logo=Puppeteer'/>
   <img src='https://img.shields.io/badge/React Query-v5.51.11-pink?logo=React Query'/>
-  <img src='https://img.shields.io/badge/Cypress-^13.14.2-green?logo=Cypress'/>
  </div>
 </center>
 
@@ -48,7 +47,6 @@
 - ESLint
 - Axios
 - Sass
-- Cypress
 - Puppeteer
 - React Hook Form
 
