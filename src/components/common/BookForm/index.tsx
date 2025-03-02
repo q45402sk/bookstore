@@ -52,7 +52,7 @@ export default function BookForm({ mode, initialData }: IBookFormProps) {
     if (mode === 'create') {
       createBook.mutate(bookInfo, {
         onSuccess: async () => {
-          router.replace(`/books/new/success/${bookInfo.id}`);
+          router.replace(`/new/success/${bookInfo.id}`);
           queryClient.invalidateQueries({
             queryKey: QueryKey.BOOKS.LIST,
             refetchType: 'all',
@@ -66,7 +66,7 @@ export default function BookForm({ mode, initialData }: IBookFormProps) {
     } else {
       updateBook.mutate(bookInfo, {
         onSuccess: async () => {
-          router.replace(`/books/${initialData?.id}`);
+          router.replace(`/${initialData?.id}`);
           queryClient.invalidateQueries({
             queryKey: QueryKey.BOOKS.LIST,
             refetchType: 'all',

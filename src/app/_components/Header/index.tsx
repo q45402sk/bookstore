@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import styles from './Header.module.scss';
+import Link from 'next/link';
 
 export default function Header({ backButton }: { backButton?: boolean }) {
   const router = useRouter();
@@ -9,15 +10,19 @@ export default function Header({ backButton }: { backButton?: boolean }) {
   };
   return (
     <header className={styles.container}>
-      {backButton && (
+      {backButton ? (
         <button
           type="button"
           onClick={handleBackButtonClick}
           className={styles.backButton}>
           뒤로가기
         </button>
+      ) : (
+        <div></div>
       )}
-      <div className={styles.logo}>송은문고</div>
+      <Link href="/" className={styles.logo}>
+        송은문고
+      </Link>
     </header>
   );
 }
