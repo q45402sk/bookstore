@@ -107,3 +107,12 @@ npm start
 | :-: | :-: | :-: | 
 | <img width="277" alt="mainpage" src="https://github.com/user-attachments/assets/2610c01e-73a9-4cf5-bb28-b67578a4bc03"> | <img width="277" alt="login" src="https://github.com/user-attachments/assets/c843fd90-fa45-4a3f-88e4-bc4f5494810d"> | <img width="277" alt="signup" src="https://github.com/user-attachments/assets/871c7234-5eff-4d53-9a93-e62266c08d23"> | 
 
+---
+
+
+## 특징적 구현 내용  
+
+- 서버사이드 페이지네이션 선택: 데이터 양이 많을 경우의 성능을 고려 
+- 교보문고 페이지 크롤링(puppeteer) 후 백엔드 서버에 저장 (post)
+- imgbb 사이트(이미지 formData를 이미지 링크로 변환해주는 사이트)를 이용해 이미지 저장 기능 구현 
+
